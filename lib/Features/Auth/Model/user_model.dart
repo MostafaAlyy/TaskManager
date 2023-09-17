@@ -15,11 +15,14 @@ class UserModel {
     username = json['username'];
     email = json['email'];
 
-    if (json['user_type'] == "admin") {
+    if (json['user_type'] == "admin" ||
+        json['user_type'] == 'UserTypes.admin') {
       userType = UserTypes.manager;
-    } else if (json['user_type'] == "manager") {
+    } else if (json['user_type'] == "manager" ||
+        json['user_type'] == 'UserTypes.manager') {
       userType = UserTypes.user;
-    } else if (json['user_type'] == "user") {
+    } else if (json['user_type'] == "user" ||
+        json['user_type'] == 'UserTypes.user') {
       userType = UserTypes.manager;
     }
   }

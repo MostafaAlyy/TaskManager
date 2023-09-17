@@ -18,10 +18,11 @@ void main() async {
   Widget widget = const LoginScreen();
 
   await storage.read(key: 'userDataString').then((value) {
-    userDataString = value;
+    userDataString = json.decode(value!);
   });
   if (userDataString != null) {
     widget = const TempPage();
+
     AuthCupit.userData = UserModel.fromJson(json.decode(userDataString!));
   }
   return runApp(MyApp(widget));
