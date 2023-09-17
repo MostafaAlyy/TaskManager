@@ -32,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 backgroundColor: Colors.green,
                 textColor: Colors.white,
                 fontSize: 12.0);
-            Navigator.push(
+            Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
                   builder: (context) => const TempPage(),

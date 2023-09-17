@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_manger/Features/Auth/ViewModel/AuthCupit/auth_cupit.dart';
+import 'package:task_manger/Features/Department/View/Pages/add_department_page.dart';
+import 'package:task_manger/Features/Department/View/Pages/update_department_page.dart';
 
 class TempPage extends StatelessWidget {
   const TempPage({super.key});
@@ -17,12 +19,36 @@ class TempPage extends StatelessWidget {
           builder: (context, state) {
             var cupit = AuthCupit.get(context);
             return Center(
-                child: ElevatedButton(
+                child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
                     child: const Text("Log Out"),
                     onPressed: () {
                       cupit.logout();
                       Navigator.pop(context);
-                    }));
+                    }),
+                ElevatedButton(
+                    child: const Text("Add department"),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AddDepartmentPage(),
+                          ));
+                    }),
+                ElevatedButton(
+                    child: const Text("Update department"),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => UpdateDepartmentPage(),
+                          ));
+                    }),
+              ],
+            ));
           },
         ),
       ),
