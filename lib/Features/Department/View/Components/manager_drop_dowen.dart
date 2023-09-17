@@ -5,11 +5,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_manger/Features/Department/Model/department_model.dart';
 import 'package:task_manger/Features/Department/ViewModel/cubit/department_cubit.dart';
 
-class DefaultDropDown extends StatelessWidget {
+class ManagerDropDown extends StatelessWidget {
   SingleValueDropDownController controller;
   String hint;
   List<Manager> list;
-  DefaultDropDown({
+  ManagerDropDown({
     super.key,
     required this.controller,
     required this.hint,

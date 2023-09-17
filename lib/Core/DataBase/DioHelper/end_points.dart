@@ -8,4 +8,6 @@ const logoutEndPoint = 'auth/logout';
 const getAllDepartmentEndpoint = 'department/index';
 const addDepartmentEndpoint = 'department/store';
 const getManagersEndPoint = 'user/show-managers';
-const updateDepartmentEndpoint = 'department/update/1';
+const updateDepartmentEndpoint = 'department/update/';
+
+const addUserEndpoint = 'user/store';

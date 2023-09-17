@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_manger/Core/DataBase/DioHelper/dio_helper.dart';
@@ -18,7 +20,9 @@ class AuthCupit extends Cubit<AuthState> {
         data: {'email': email, 'password': password}).then((value) {
       userData = UserModel.fromJson(value.data['data']);
       if (keepMeLogin) {
-        storage.write(key: 'token', value: userData!.token);
+        String userDataString = json.encode((userData!.toJson()));
+        storage.write(
+            key: 'userDataString', value: json.encode((userDataString)));
       }
       emit(AuthLoginSuccessState(message: value.data['message']));
     }).catchError((onError) {
@@ -31,7 +35,7 @@ class AuthCupit extends Cubit<AuthState> {
         .then((value) {
       userData = null;
       storage.delete(
-        key: 'token',
+        key: 'userDataString',
       );
       //emit(AuthLogOutSuccessState());
     }).catchError((onError) {

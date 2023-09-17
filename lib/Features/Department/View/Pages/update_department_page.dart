@@ -2,7 +2,8 @@ import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_manger/Features/Department/Model/department_model.dart';
-import 'package:task_manger/Features/Department/View/Components/defult_drop_dowen.dart';
+import 'package:task_manger/Features/Department/View/Components/department_drop_dowen.dart';
+import 'package:task_manger/Features/Department/View/Components/manager_drop_dowen.dart';
 import 'package:task_manger/Features/Department/ViewModel/cubit/department_cubit.dart';
 
 class UpdateDepartmentPage extends StatefulWidget {
@@ -13,22 +14,24 @@ class UpdateDepartmentPage extends StatefulWidget {
 }
 
 class _UpdateDepartmentPageState extends State<UpdateDepartmentPage> {
-  final TextEditingController departmentNameController =
-      TextEditingController();
-
-  SingleValueDropDownController dropDownController =
+  SingleValueDropDownController managerDropDownController =
+      SingleValueDropDownController();
+  SingleValueDropDownController departmentDropDownController =
       SingleValueDropDownController();
   @override
   void dispose() {
     // TODO: implement dispose
-    dropDownController.dispose();
+    departmentDropDownController.dispose();
+    managerDropDownController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => DepartmentCubit()..getAllManagers(),
+      create: (context) => DepartmentCubit()
+        ..getAllManagers()
+        ..getAllDepartment(),
       child: BlocConsumer<DepartmentCubit, DepartmentState>(
         listener: (context, state) {
           // TODO: implement listener
@@ -63,19 +66,16 @@ class _UpdateDepartmentPageState extends State<UpdateDepartmentPage> {
                     const SizedBox(
                       height: 20,
                     ),
-                    TextFormField(
-                      controller: departmentNameController,
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: const InputDecoration(
-                        enabledBorder: OutlineInputBorder(),
-                        labelText: "Name",
-                      ),
+                    DepartmentDropDown(
+                      controller: departmentDropDownController,
+                      hint: 'Select Department',
+                      list: cupit.departments,
                     ),
                     const SizedBox(
                       height: 20,
                     ),
-                    DefaultDropDown(
-                      controller: dropDownController,
+                    ManagerDropDown(
+                      controller: managerDropDownController,
                       hint: 'Select Manager',
                       list: cupit.mangers,
                     ),
@@ -87,8 +87,11 @@ class _UpdateDepartmentPageState extends State<UpdateDepartmentPage> {
                       height: MediaQuery.of(context).size.height / 15,
                       child: MaterialButton(
                         onPressed: () {
-                          cupit.updateDepartment(departmentNameController.text,
-                              dropDownController.dropDownValue!.value!);
+                          cupit.updateDepartment(
+                              departmentDropDownController.dropDownValue!.name,
+                              managerDropDownController.dropDownValue!.value!,
+                              departmentDropDownController
+                                  .dropDownValue!.value!);
                         },
                         color: const Color(0xff5a55ca),
                         child: const Text(

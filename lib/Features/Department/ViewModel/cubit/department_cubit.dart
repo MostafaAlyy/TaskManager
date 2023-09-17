@@ -59,9 +59,9 @@ class DepartmentCubit extends Cubit<DepartmentState> {
     });
   }
 
-  void updateDepartment(String name, int managerId) {
+  void updateDepartment(String name, int managerId, int departmentID) {
     DioHelper.postData(
-        url: updateDepartmentEndpoint,
+        url: "$updateDepartmentEndpoint$departmentID",
         token: AuthCupit.userData!.token!,
         data: {'name': name, 'manager_id': managerId}).then((value) {
       debugPrint(value.data.toString());
