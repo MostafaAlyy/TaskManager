@@ -4,18 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_manger/Features/Department/Model/department_model.dart';
 import 'package:task_manger/Features/Department/ViewModel/cubit/department_cubit.dart';
+import 'package:task_manger/Features/User/Model/user_from_users_model.dart';
 
-class DepartmentDropDown extends StatelessWidget {
+class UsersDropDown extends StatelessWidget {
   SingleValueDropDownController controller;
   String hint;
-  List<Department> list;
-  Function? onChange;
-  DepartmentDropDown({
+  List<UserFromUsersModel> list;
+  UsersDropDown({
     super.key,
     required this.controller,
     required this.hint,
     required this.list,
-    this.onChange,
   });
   @override
   Widget build(BuildContext context) {
@@ -30,9 +29,9 @@ class DepartmentDropDown extends StatelessWidget {
           return ConditionalBuilder(
             condition: list.isNotEmpty,
             builder: (context) => DropDownTextField(
-              textFieldDecoration: const InputDecoration(
-                labelText: "Select Department",
-                enabledBorder: OutlineInputBorder(),
+              textFieldDecoration: InputDecoration(
+                labelText: hint,
+                enabledBorder: const OutlineInputBorder(),
               ),
               controller: controller,
               searchDecoration: InputDecoration(hintText: hint),
@@ -46,9 +45,7 @@ class DepartmentDropDown extends StatelessWidget {
               }).toList(),
               onChanged: (value) {
                 cupit.changeDropDownValue();
-                if (onChange != null) {
-                  onChange!.call();
-                }
+                //   controller = value;
               },
             ),
             fallback: (context) => const CircularProgressIndicator(),

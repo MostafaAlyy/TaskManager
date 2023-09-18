@@ -1,31 +1,46 @@
+import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:task_manger/Features/Auth/Model/user_model.dart';
+import 'package:task_manger/Features/Department/View/Components/department_drop_dowen.dart';
+import 'package:task_manger/Features/Department/ViewModel/cubit/department_cubit.dart';
+import 'package:task_manger/Features/User/View/Components/users_drob_dowen_menu.dart';
 import 'package:task_manger/Features/User/ViewModel/cubit/user_cubit.dart';
 
-class AddUserPage extends StatefulWidget {
-  const AddUserPage({super.key});
+class UpdateUserPage extends StatefulWidget {
+  const UpdateUserPage({super.key});
 
   @override
-  State<AddUserPage> createState() => _AddUserPageState();
+  State<UpdateUserPage> createState() => _UpdateUserPageState();
 }
 
-class _AddUserPageState extends State<AddUserPage> {
-  final TextEditingController nameController = TextEditingController();
+class _UpdateUserPageState extends State<UpdateUserPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final SingleValueDropDownController nameController =
+      SingleValueDropDownController();
+  final SingleValueDropDownController departmentDropDownController =
+      SingleValueDropDownController();
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    nameController.dispose();
+    departmentDropDownController.dispose();
+    super.dispose();
+  }
+
   UserTypes userType = UserTypes.admin;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => UserCubit(),
+      create: (context) => UserCubit()..getAllUsers(),
       child: BlocConsumer<UserCubit, UserState>(
         listener: (context, state) {
           // TODO: implement listener
 
-          if (state is AddUserSuccessState) {
+          if (state is UpdateUserSuccessState) {
             Fluttertoast.showToast(
                 msg: state.message,
                 toastLength: Toast.LENGTH_LONG,
@@ -35,7 +50,7 @@ class _AddUserPageState extends State<AddUserPage> {
                 textColor: Colors.white,
                 fontSize: 12.0);
           }
-          if (state is AddUserErrorState) {
+          if (state is UpdateUserErrorState) {
             Fluttertoast.showToast(
                 msg: state.error,
                 toastLength: Toast.LENGTH_LONG,
@@ -57,7 +72,7 @@ class _AddUserPageState extends State<AddUserPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Add New User!",
+                      "Update User Details!",
                       style: TextStyle(
                           fontSize:
                               MediaQuery.of(context).textScaleFactor * 38),
@@ -66,7 +81,7 @@ class _AddUserPageState extends State<AddUserPage> {
                       height: 20,
                     ),
                     Text(
-                      "Create a new user now and assign them tasks right away.",
+                      "Update user details and give them a new identity.",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Colors.grey,
@@ -76,13 +91,10 @@ class _AddUserPageState extends State<AddUserPage> {
                     const SizedBox(
                       height: 20,
                     ),
-                    TextFormField(
+                    UsersDropDown(
                       controller: nameController,
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: const InputDecoration(
-                        enabledBorder: OutlineInputBorder(),
-                        labelText: "Name",
-                      ),
+                      hint: 'Select User',
+                      list: cupit.allUsers,
                     ),
                     const SizedBox(
                       height: 20,
@@ -115,6 +127,26 @@ class _AddUserPageState extends State<AddUserPage> {
                       decoration: const InputDecoration(
                         enabledBorder: OutlineInputBorder(),
                         labelText: "Password",
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    BlocProvider(
+                      create: (context) =>
+                          DepartmentCubit()..getAllDepartment(),
+                      child: BlocConsumer<DepartmentCubit, DepartmentState>(
+                        listener: (context, state) {
+                          // TODO: implement listener
+                        },
+                        builder: (context, state) {
+                          var departmentCupit = DepartmentCubit.get(context);
+                          return DepartmentDropDown(
+                            controller: departmentDropDownController,
+                            hint: 'Select Department',
+                            list: departmentCupit.departments,
+                          );
+                        },
                       ),
                     ),
                     const SizedBox(
@@ -199,8 +231,8 @@ class _AddUserPageState extends State<AddUserPage> {
                       height: MediaQuery.of(context).size.height / 15,
                       child: MaterialButton(
                         onPressed: () {
-                          cupit.addUser(
-                              name: nameController.text,
+                          cupit.updateUser(
+                              name: nameController.dropDownValue!.name,
                               email: emailController.text,
                               phone: phoneController.text,
                               password: passwordController.text,
@@ -208,11 +240,14 @@ class _AddUserPageState extends State<AddUserPage> {
                                   ? 0
                                   : (userType == UserTypes.manager)
                                       ? 1
-                                      : 2);
+                                      : 2,
+                              departmentId: departmentDropDownController
+                                  .dropDownValue!.value,
+                              userId: nameController.dropDownValue!.value);
                         },
                         color: const Color(0xff5a55ca),
                         child: const Text(
-                          "CREATE",
+                          "UPDATE",
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,

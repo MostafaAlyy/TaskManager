@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:task_manger/Features/Auth/View/Pages/Temp_page.dart';
 import 'package:task_manger/Features/Auth/ViewModel/AuthCupit/auth_cupit.dart';
+import 'package:task_manger/Features/Home/View/Pages/home_page.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -35,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const TempPage(),
+                  builder: (context) => const HomePage(),
                 ));
           }
           if (state is AuthLoginErrorState) {

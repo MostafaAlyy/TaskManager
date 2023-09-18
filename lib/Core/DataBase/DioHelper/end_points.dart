@@ -11,3 +11,5 @@ const getManagersEndPoint = 'user/show-managers';
 const updateDepartmentEndpoint = 'department/update/';
 
 const addUserEndpoint = 'user/store';
+const updateUserEndpoint = 'user/update/';
+const getAllUsersEndpoint = 'user/index';

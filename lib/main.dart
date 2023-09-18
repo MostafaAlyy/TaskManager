@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:task_manger/Core/DataBase/DioHelper/dio_helper.dart';
 import 'package:task_manger/Features/Auth/Model/user_model.dart';
-import 'package:task_manger/Features/Auth/View/Pages/Temp_page.dart';
 import 'package:task_manger/Features/Auth/View/Pages/login_page.dart';
 import 'package:task_manger/Features/Auth/ViewModel/AuthCupit/auth_cupit.dart';
+import 'package:task_manger/Features/Home/View/Pages/home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,10 +18,12 @@ void main() async {
   Widget widget = const LoginScreen();
 
   await storage.read(key: 'userDataString').then((value) {
-    userDataString = json.decode(value!);
+    if (value != null) {
+      userDataString = json.decode(value);
+    }
   });
   if (userDataString != null) {
-    widget = const TempPage();
+    widget = const HomePage();
 
     AuthCupit.userData = UserModel.fromJson(json.decode(userDataString!));
   }
