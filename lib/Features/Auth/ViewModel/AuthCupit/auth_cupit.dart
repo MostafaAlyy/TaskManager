@@ -12,7 +12,7 @@ class AuthCupit extends Cubit<AuthState> {
   AuthCupit() : super(AuthInitial());
   static AuthCupit get(BuildContext context) => BlocProvider.of(context);
   static UserModel? userData;
-  FlutterSecureStorage storage = const FlutterSecureStorage();
+  static FlutterSecureStorage storage = const FlutterSecureStorage();
 
   void login(String email, String password, bool keepMeLogin) {
     DioHelper.postData(
@@ -30,7 +30,7 @@ class AuthCupit extends Cubit<AuthState> {
     });
   }
 
-  void logout() {
+  static logout() {
     DioHelper.postData(url: logoutEndPoint, data: {'token': userData!.token})
         .then((value) {
       userData = null;
@@ -38,8 +38,6 @@ class AuthCupit extends Cubit<AuthState> {
         key: 'userDataString',
       );
       //emit(AuthLogOutSuccessState());
-    }).catchError((onError) {
-      emit(AuthLogOutErrorState());
-    });
+    }).catchError((onError) {});
   }
 }

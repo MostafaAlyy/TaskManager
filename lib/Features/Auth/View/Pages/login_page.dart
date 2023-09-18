@@ -32,11 +32,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 backgroundColor: Colors.green,
                 textColor: Colors.white,
                 fontSize: 12.0);
-            Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const HomePage(),
-                ));
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const HomePage(),
+              ),
+              (route) => false,
+            );
           }
           if (state is AuthLoginErrorState) {
             Fluttertoast.showToast(

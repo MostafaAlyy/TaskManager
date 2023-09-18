@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:task_manger/Features/Auth/View/Pages/login_page.dart';
+import 'package:task_manger/Features/Auth/ViewModel/AuthCupit/auth_cupit.dart';
 import 'package:task_manger/Features/Department/View/Pages/add_department_page.dart';
 import 'package:task_manger/Features/Department/View/Pages/update_department_page.dart';
 import 'package:task_manger/Features/Home/View/Pages/home_page.dart';
@@ -101,6 +103,20 @@ class HomeDrawer extends StatelessWidget {
                 },
                 leading: const Icon(Icons.task_alt_outlined),
                 title: const Text('User Tasks'),
+              ),
+              ListTile(
+                onTap: () {
+                  AuthCupit.logout();
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const LoginScreen(),
+                    ),
+                    (route) => false,
+                  );
+                },
+                leading: const Icon(Icons.logout),
+                title: const Text('Log Out'),
               ),
               const Spacer(),
               DefaultTextStyle(
