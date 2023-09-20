@@ -13,3 +13,8 @@ const updateDepartmentEndpoint = 'department/update/';
 const addUserEndpoint = 'user/store';
 const updateUserEndpoint = 'user/update/';
 const getAllUsersEndpoint = 'user/index';
+const getAllEmployeeEndpoint = 'user/show-employees';
+
+const addTaskEndpoint = 'task/store';
+const getAllTasksEndpoint = 'task/index';
+const updateTasksEndpoint = 'task/update/';

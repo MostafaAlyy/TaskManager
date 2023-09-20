@@ -17,13 +17,13 @@ class UserModel {
 
     if (json['user_type'] == "admin" ||
         json['user_type'] == 'UserTypes.admin') {
-      userType = UserTypes.manager;
+      userType = UserTypes.admin;
     } else if (json['user_type'] == "manager" ||
         json['user_type'] == 'UserTypes.manager') {
-      userType = UserTypes.user;
+      userType = UserTypes.manager;
     } else if (json['user_type'] == "user" ||
         json['user_type'] == 'UserTypes.user') {
-      userType = UserTypes.manager;
+      userType = UserTypes.user;
     }
   }
 

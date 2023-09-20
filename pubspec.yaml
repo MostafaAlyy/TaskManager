@@ -46,6 +46,8 @@ dependencies:
   flutter_svg: ^2.0.7
   percent_indicator: ^4.2.3
   flutter_timeline_calendar: ^1.0.9
+  syncfusion_flutter_datepicker: ^23.1.36
+  group_radio_button: ^1.3.0
 
 dev_dependencies:
   flutter_test:

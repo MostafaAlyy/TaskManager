@@ -4,7 +4,8 @@ import 'package:task_manger/Features/Auth/ViewModel/AuthCupit/auth_cupit.dart';
 import 'package:task_manger/Features/Department/View/Pages/add_department_page.dart';
 import 'package:task_manger/Features/Department/View/Pages/update_department_page.dart';
 import 'package:task_manger/Features/Home/View/Pages/home_page.dart';
-import 'package:task_manger/Features/Home/View/Pages/user_tasks.dart';
+import 'package:task_manger/Features/Tasks/View/pages/user_tasks.dart';
+import 'package:task_manger/Features/Tasks/View/pages/add_tasks_page.dart';
 import 'package:task_manger/Features/User/View/Pages/add_user_page.dart';
 import 'package:task_manger/Features/User/View/Pages/update_user.dart';
 
@@ -103,6 +104,17 @@ class HomeDrawer extends StatelessWidget {
                 },
                 leading: const Icon(Icons.task_alt_outlined),
                 title: const Text('User Tasks'),
+              ),
+              ListTile(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const AddTaskPage(),
+                      ));
+                },
+                leading: const Icon(Icons.task_alt_outlined),
+                title: const Text('Add Task'),
               ),
               ListTile(
                 onTap: () {

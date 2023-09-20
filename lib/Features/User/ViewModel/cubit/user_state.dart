@@ -28,3 +28,7 @@ final class UpdateUserErrorState extends UserState {
 final class GetAllUsersSuccessState extends UserState {}
 
 final class GetAllUsersErrorState extends UserState {}
+
+final class GetAllEmployeesSuccessState extends UserState {}
+
+final class GetAllEmployeesErrorState extends UserState {}

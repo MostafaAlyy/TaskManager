@@ -2,15 +2,14 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:task_manger/Features/Department/Model/department_model.dart';
 import 'package:task_manger/Features/Department/ViewModel/cubit/department_cubit.dart';
 import 'package:task_manger/Features/User/Model/user_from_users_model.dart';
 
 class UsersDropDown extends StatelessWidget {
-  SingleValueDropDownController controller;
-  String hint;
-  List<UserFromUsersModel> list;
-  UsersDropDown({
+  final SingleValueDropDownController controller;
+  final String hint;
+  final List<UserFromUsersModel> list;
+  const UsersDropDown({
     super.key,
     required this.controller,
     required this.hint,

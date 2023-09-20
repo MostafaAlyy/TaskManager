@@ -79,4 +79,19 @@ class UserCubit extends Cubit<UserState> {
       emit(GetAllUsersErrorState());
     });
   }
+
+  List<UserFromUsersModel> allEmployee = [];
+  void getAllEmployee() {
+    allEmployee = [];
+    DioHelper.getData(
+            url: getAllEmployeeEndpoint, token: AuthCupit.userData!.token)
+        .then((value) {
+      for (var element in value.data['data']) {
+        allEmployee.add(UserFromUsersModel.fromJson(element));
+      }
+      emit(GetAllEmployeesSuccessState());
+    }).then((value) {
+      emit(GetAllEmployeesErrorState());
+    });
+  }
 }
