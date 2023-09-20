@@ -9,6 +9,7 @@ import 'package:task_manger/Features/Auth/Model/user_model.dart';
 import 'package:task_manger/Features/Auth/View/Pages/login_page.dart';
 import 'package:task_manger/Features/Auth/ViewModel/AuthCupit/auth_cupit.dart';
 import 'package:task_manger/Features/Home/View/Pages/home_page.dart';
+import 'package:task_manger/Features/Tasks/View/pages/user_tasks.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,9 +24,13 @@ void main() async {
     }
   });
   if (userDataString != null) {
-    widget = const HomePage();
-
     AuthCupit.userData = UserModel.fromJson(json.decode(userDataString!));
+    if (AuthCupit.userData!.userType == UserTypes.admin ||
+        AuthCupit.userData!.userType == UserTypes.manager) {
+      widget = const HomePage();
+    } else {
+      widget = const UserTasksPage();
+    }
   }
   return runApp(MyApp(widget));
 }

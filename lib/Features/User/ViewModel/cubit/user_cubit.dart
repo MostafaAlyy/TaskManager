@@ -94,4 +94,16 @@ class UserCubit extends Cubit<UserState> {
       emit(GetAllEmployeesErrorState());
     });
   }
+
+  void deleteUser({
+    required int userId,
+  }) {
+    DioHelper.deleteData(
+            url: "$deleteUserEndpoint$userId", token: AuthCupit.userData!.token)
+        .then((value) {
+      emit(DeleteUserSuccessState(value.data['message']));
+    }).catchError((onError) {
+      emit(DeleteUserErrorState('You can`t delete parent.'));
+    });
+  }
 }

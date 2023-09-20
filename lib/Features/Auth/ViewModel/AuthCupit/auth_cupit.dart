@@ -25,6 +25,7 @@ class AuthCupit extends Cubit<AuthState> {
             key: 'userDataString', value: json.encode((userDataString)));
       }
       emit(AuthLoginSuccessState(message: value.data['message']));
+      debugPrint(AuthCupit.userData!.userType.toString());
     }).catchError((onError) {
       emit(AuthLoginErrorState(errorMessage: onError.toString()));
     });

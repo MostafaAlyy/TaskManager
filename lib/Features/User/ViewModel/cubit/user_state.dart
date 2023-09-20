@@ -25,6 +25,16 @@ final class UpdateUserErrorState extends UserState {
   UpdateUserErrorState(this.error);
 }
 
+final class DeleteUserSuccessState extends UserState {
+  String message;
+  DeleteUserSuccessState(this.message);
+}
+
+final class DeleteUserErrorState extends UserState {
+  String error;
+  DeleteUserErrorState(this.error);
+}
+
 final class GetAllUsersSuccessState extends UserState {}
 
 final class GetAllUsersErrorState extends UserState {}

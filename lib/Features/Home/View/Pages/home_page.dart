@@ -91,7 +91,7 @@ class _HomePageState extends State<HomePage> {
                     GestureDetector(
                       onTap: () {
                         setState(() {
-                          selectedScreenWidget = const TasksPage();
+                          selectedScreenWidget = const TaskPage();
                         });
                       },
                       child: Column(
@@ -99,19 +99,19 @@ class _HomePageState extends State<HomePage> {
                           Row(
                             children: [
                               Icon(Icons.task_alt_outlined,
-                                  color: (selectedScreenWidget is TasksPage)
+                                  color: (selectedScreenWidget is TaskPage)
                                       ? const Color(0xff5a55ca)
                                       : Colors.black),
                               Text(
                                 "Tasks",
                                 style: TextStyle(
-                                    color: (selectedScreenWidget is TasksPage)
+                                    color: (selectedScreenWidget is TaskPage)
                                         ? const Color(0xff5a55ca)
                                         : Colors.black),
                               ),
                             ],
                           ),
-                          if (selectedScreenWidget is TasksPage)
+                          if (selectedScreenWidget is TaskPage)
                             Container(
                               height: 2,
                               width: MediaQuery.of(context).size.width * 0.2,

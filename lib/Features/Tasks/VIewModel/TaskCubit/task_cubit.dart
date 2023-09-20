@@ -71,6 +71,19 @@ class TaskCubit extends Cubit<TaskState> {
       emit(UpdateTasksErrorState(errorMessage: onError.toString()));
     });
   }
+
+  void deleteTask({
+    required int taskId,
+  }) {
+    DioHelper.deleteData(
+            url: "$deleteTaskEndpoint$taskId", token: AuthCupit.userData!.token)
+        .then((value) {
+      emit(UpdateTasksSussesState(message: value.data['message']));
+    }).catchError((onError) {
+      emit(UpdateTasksErrorState(
+          errorMessage: 'Department must be empty to delete'));
+    });
+  }
 }
 
 int statusToInt(String status) {

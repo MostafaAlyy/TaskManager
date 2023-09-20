@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:task_manger/Features/Department/Model/department_model.dart';
 import 'package:task_manger/Features/Home/View/Components/user_card.dart';
 
 class DepartmentUsersWidget extends StatelessWidget {
-  const DepartmentUsersWidget({super.key});
+  const DepartmentUsersWidget({super.key, required this.department});
+  final Department department;
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +22,9 @@ class DepartmentUsersWidget extends StatelessWidget {
               const SizedBox(
                 width: 5,
               ),
-              const Text(
-                'department name',
-                style: TextStyle(fontSize: 16, color: Colors.grey),
+              Text(
+                department.name!,
+                style: const TextStyle(fontSize: 16, color: Colors.grey),
               ),
               const Icon(
                 Icons.edit_note_outlined,
@@ -39,8 +41,10 @@ class DepartmentUsersWidget extends StatelessWidget {
               childAspectRatio: 3 / 2,
               crossAxisSpacing: 20,
               mainAxisSpacing: 20),
-          itemCount: 4,
-          itemBuilder: (context, index) => const UserCard(),
+          itemCount:
+              (department.employees != null) ? department.employees!.length : 0,
+          itemBuilder: (context, index) =>
+              UserCard(employee: department.employees![index]),
         ),
       ],
     );

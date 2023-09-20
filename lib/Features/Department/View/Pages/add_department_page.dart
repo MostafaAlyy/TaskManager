@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:task_manger/Features/Department/ViewModel/cubit/department_cubit.dart';
 
 class AddDepartmentPage extends StatelessWidget {
@@ -14,6 +15,26 @@ class AddDepartmentPage extends StatelessWidget {
       child: BlocConsumer<DepartmentCubit, DepartmentState>(
         listener: (context, state) {
           // TODO: implement listener
+          if (state is AddDepartmentsSuccessState) {
+            Fluttertoast.showToast(
+                msg: state.message,
+                toastLength: Toast.LENGTH_LONG,
+                gravity: ToastGravity.BOTTOM,
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.green,
+                textColor: Colors.white,
+                fontSize: 12.0);
+          }
+          if (state is AddDepartmentsErrorState) {
+            Fluttertoast.showToast(
+                msg: state.error,
+                toastLength: Toast.LENGTH_LONG,
+                gravity: ToastGravity.BOTTOM,
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.red,
+                textColor: Colors.white,
+                fontSize: 12.0);
+          }
         },
         builder: (context, state) {
           var cupit = DepartmentCubit.get(context);

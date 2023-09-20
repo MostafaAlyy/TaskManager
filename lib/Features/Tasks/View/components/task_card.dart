@@ -52,15 +52,23 @@ class TaskCard extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      cupit.allTasks[taskIndex].name!,
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.5,
+                      child: Text(
+                        cupit.allTasks[taskIndex].name!,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
                     const SizedBox(
                       width: 10,
                     ),
-                    Text(
-                      cupit.allTasks[taskIndex].description!,
-                      style: const TextStyle(color: Colors.grey),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.5,
+                      child: Text(
+                        cupit.allTasks[taskIndex].description!,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(color: Colors.grey),
+                      ),
                     ),
                   ],
                 ),

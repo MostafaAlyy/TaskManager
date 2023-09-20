@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_manger/Features/Auth/Model/user_model.dart';
 import 'package:task_manger/Features/Auth/View/Pages/login_page.dart';
 import 'package:task_manger/Features/Auth/ViewModel/AuthCupit/auth_cupit.dart';
 import 'package:task_manger/Features/Department/View/Pages/add_department_page.dart';
@@ -10,7 +11,9 @@ import 'package:task_manger/Features/User/View/Pages/add_user_page.dart';
 import 'package:task_manger/Features/User/View/Pages/update_user.dart';
 
 class HomeDrawer extends StatelessWidget {
-  const HomeDrawer({super.key});
+  const HomeDrawer({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -44,78 +47,80 @@ class HomeDrawer extends StatelessWidget {
                   Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const HomePage(),
+                        builder: (context) =>
+                            (AuthCupit.userData!.userType != UserTypes.user)
+                                ? const HomePage()
+                                : const UserTasksPage(),
                       ));
                 },
                 leading: const Icon(Icons.home),
                 title: const Text('Home'),
               ),
-              ListTile(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => AddDepartmentPage(),
-                      ));
-                },
-                leading: const Icon(Icons.table_bar_sharp),
-                title: const Text('Add Department'),
-              ),
-              ListTile(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const UpdateDepartmentPage(),
-                      ));
-                },
-                leading: const Icon(Icons.update),
-                title: const Text('Update Department'),
-              ),
-              ListTile(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const AddUserPage(),
-                      ));
-                },
-                leading: const Icon(Icons.person),
-                title: const Text('Add User'),
-              ),
-              ListTile(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const UpdateUserPage(),
-                      ));
-                },
-                leading: const Icon(Icons.update),
-                title: const Text('Update User'),
-              ),
-              ListTile(
-                onTap: () {
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const UserTasksPage(),
-                      ));
-                },
-                leading: const Icon(Icons.task_alt_outlined),
-                title: const Text('User Tasks'),
-              ),
-              ListTile(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const AddTaskPage(),
-                      ));
-                },
-                leading: const Icon(Icons.task_alt_outlined),
-                title: const Text('Add Task'),
-              ),
+              if (AuthCupit.userData!.userType == UserTypes.admin ||
+                  AuthCupit.userData!.userType == UserTypes.manager)
+                ListTile(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AddDepartmentPage(),
+                        ));
+                  },
+                  leading: const Icon(Icons.table_bar_sharp),
+                  title: const Text('Add Department'),
+                ),
+              if (AuthCupit.userData!.userType == UserTypes.admin ||
+                  AuthCupit.userData!.userType == UserTypes.manager)
+                ListTile(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const UpdateDepartmentPage(),
+                        ));
+                  },
+                  leading: const Icon(Icons.update),
+                  title: const Text('Update Department'),
+                ),
+              if (AuthCupit.userData!.userType == UserTypes.admin ||
+                  AuthCupit.userData!.userType == UserTypes.manager)
+                ListTile(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const AddUserPage(),
+                        ));
+                  },
+                  leading: const Icon(Icons.person),
+                  title: const Text('Add User'),
+                ),
+              if (AuthCupit.userData!.userType == UserTypes.admin ||
+                  AuthCupit.userData!.userType == UserTypes.manager)
+                ListTile(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const UpdateUserPage(),
+                        ));
+                  },
+                  leading: const Icon(Icons.update),
+                  title: const Text('Update User'),
+                ),
+              if (AuthCupit.userData!.userType == UserTypes.admin ||
+                  AuthCupit.userData!.userType == UserTypes.manager)
+                ListTile(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const AddTaskPage(),
+                        ));
+                  },
+                  leading: const Icon(Icons.task_alt_outlined),
+                  title: const Text('Add Task'),
+                ),
               ListTile(
                 onTap: () {
                   AuthCupit.logout();

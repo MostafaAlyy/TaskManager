@@ -22,7 +22,7 @@ Future updateTaskDialog({
         return Center(
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 16),
-            height: MediaQuery.of(context).size.height / 1.6,
+            height: MediaQuery.of(context).size.height / 1.3,
             width: MediaQuery.of(context).size.width / 1.1,
             clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(
@@ -338,6 +338,28 @@ class _UpdateTaskWidgetState extends State<UpdateTaskWidget> {
                   color: const Color(0xff5a55ca),
                   child: const Text(
                     "Update",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              SizedBox(
+                width: double.infinity,
+                height: MediaQuery.of(context).size.height / 15,
+                child: MaterialButton(
+                  onPressed: () {
+                    widget.cupit.deleteTask(
+                        taskId: widget.cupit.allTasks[widget.taskIndex].id!);
+                    Navigator.pop(context);
+                  },
+                  color: const Color(0xff5a55ca),
+                  child: const Text(
+                    "Delete Task",
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,

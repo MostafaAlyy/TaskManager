@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:task_manger/Features/Auth/Model/user_model.dart';
 import 'package:task_manger/Features/Auth/ViewModel/AuthCupit/auth_cupit.dart';
 import 'package:task_manger/Features/Home/View/Pages/home_page.dart';
+import 'package:task_manger/Features/Tasks/View/pages/user_tasks.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -35,7 +37,11 @@ class _LoginScreenState extends State<LoginScreen> {
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
-                builder: (context) => const HomePage(),
+                builder: (context) =>
+                    (AuthCupit.userData!.userType == UserTypes.admin ||
+                            AuthCupit.userData!.userType == UserTypes.manager)
+                        ? const HomePage()
+                        : const UserTasksPage(),
               ),
               (route) => false,
             );

@@ -60,6 +60,27 @@ class _UpdateUserPageState extends State<UpdateUserPage> {
                 textColor: Colors.white,
                 fontSize: 12.0);
           }
+
+          if (state is DeleteUserSuccessState) {
+            Fluttertoast.showToast(
+                msg: state.message,
+                toastLength: Toast.LENGTH_LONG,
+                gravity: ToastGravity.BOTTOM,
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.green,
+                textColor: Colors.white,
+                fontSize: 12.0);
+          }
+          if (state is DeleteUserErrorState) {
+            Fluttertoast.showToast(
+                msg: state.error,
+                toastLength: Toast.LENGTH_LONG,
+                gravity: ToastGravity.BOTTOM,
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.red,
+                textColor: Colors.white,
+                fontSize: 12.0);
+          }
         },
         builder: (context, state) {
           var cupit = UserCubit.get(context);
@@ -248,6 +269,27 @@ class _UpdateUserPageState extends State<UpdateUserPage> {
                         color: const Color(0xff5a55ca),
                         child: const Text(
                           "UPDATE",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 25),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 25,
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      height: MediaQuery.of(context).size.height / 15,
+                      child: MaterialButton(
+                        onPressed: () {
+                          cupit.deleteUser(
+                              userId: nameController.dropDownValue!.value);
+                        },
+                        color: const Color(0xff5a55ca),
+                        child: const Text(
+                          "Delete Selected user",
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,

@@ -16,6 +16,7 @@ class DepartmentCubit extends Cubit<DepartmentState> {
 
   List<Department> departments = [];
   void getAllDepartment() {
+    emit(GetAllDepartmentsLLoadingState());
     departments = [];
     DioHelper.getData(
             url: getAllDepartmentEndpoint, token: AuthCupit.userData!.token!)
@@ -36,10 +37,10 @@ class DepartmentCubit extends Cubit<DepartmentState> {
             token: AuthCupit.userData!.token)
         .then((value) {
       debugPrint(value.toString());
-      emit(AddDepartmentsSuccessState());
+      emit(AddDepartmentsSuccessState(value.data['message']));
     }).catchError((onError) {
       debugPrint(onError.toString());
-      emit(AddDepartmentsErrorState());
+      emit(AddDepartmentsErrorState(onError.toString()));
     });
   }
 
@@ -65,10 +66,23 @@ class DepartmentCubit extends Cubit<DepartmentState> {
         token: AuthCupit.userData!.token!,
         data: {'name': name, 'manager_id': managerId}).then((value) {
       debugPrint(value.data.toString());
-      emit(UpdateDepartmentsSuccessState());
+      emit(UpdateDepartmentsSuccessState(value.data['message']));
     }).catchError((onError) {
       print(onError.toString());
-      emit(UpdateDepartmentsErrorState());
+      emit(UpdateDepartmentsErrorState(onError.toString()));
+    });
+  }
+
+  void deleteDepartment({
+    required int departmentId,
+  }) {
+    DioHelper.deleteData(
+            url: "$deleteDepartmentEndpoint$departmentId",
+            token: AuthCupit.userData!.token)
+        .then((value) {
+      emit(UpdateDepartmentsSuccessState(value.data['message']));
+    }).catchError((onError) {
+      emit(UpdateDepartmentsErrorState('Department must be empty to delete'));
     });
   }
 }

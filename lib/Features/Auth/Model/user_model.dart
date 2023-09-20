@@ -32,6 +32,7 @@ class UserModel {
     data['token'] = token;
     data['username'] = username;
     data['email'] = email;
+
     data['user_type'] = userType.toString();
     return data;
   }

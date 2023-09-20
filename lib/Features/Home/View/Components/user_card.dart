@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:task_manger/Features/Department/Model/department_model.dart';
 
 class UserCard extends StatelessWidget {
-  const UserCard({super.key});
+  const UserCard({super.key, required this.employee});
+  final Employees employee;
 
   @override
   Widget build(BuildContext context) {
@@ -23,29 +25,39 @@ class UserCard extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Employee name',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              Text(
+                employee.name!,
+                style:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               Container(
                   color: Colors.purple.withOpacity(0.3),
-                  child: const Text(' Admin ')),
-              const Row(
+                  child: Text(employee.userType!)),
+              const SizedBox(
+                height: 2,
+              ),
+              Row(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.email_outlined,
                     size: 16,
                   ),
-                  Text(' email')
+                  Text(
+                    employee.email!,
+                    style: const TextStyle(fontSize: 10),
+                  )
                 ],
               ),
-              const Row(
+              const SizedBox(
+                height: 2,
+              ),
+              Row(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.phone_outlined,
                     size: 16,
                   ),
-                  Text(' phone')
+                  Text(employee.phone.toString())
                 ],
               ),
             ],
