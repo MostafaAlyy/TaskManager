@@ -138,12 +138,13 @@ class _UpdateDepartmentPageState extends State<UpdateDepartmentPage> {
                                   .dropDownValue!.value!);
                         },
                         color: const Color(0xff5a55ca),
-                        child: const Text(
+                        child: Text(
                           "Delete selected Department",
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
-                              fontSize: 25),
+                              fontSize:
+                                  MediaQuery.of(context).textScaleFactor * 16),
                         ),
                       ),
                     )
