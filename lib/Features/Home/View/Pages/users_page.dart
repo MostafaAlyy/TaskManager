@@ -22,7 +22,7 @@ class USersPage extends StatelessWidget {
                 const LinearProgressIndicator(),
               Expanded(
                 child: ListView.separated(
-                    physics: const NeverScrollableScrollPhysics(),
+                    //  physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) => DepartmentUsersWidget(
                           department: cupit.departments[index],
                         ),

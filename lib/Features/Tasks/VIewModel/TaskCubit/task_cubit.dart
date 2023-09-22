@@ -42,8 +42,9 @@ class TaskCubit extends Cubit<TaskState> {
     emit(GetAllTasksLoadingState());
     allTasks = [];
     DioHelper.getData(
-            url: getAllTasksEndpoint, token: AuthCupit.userData!.token)
-        .then((value) {
+      url: getAllTasksEndpoint,
+      token: AuthCupit.userData!.token,
+    ).then((value) {
       for (var element in value.data['data']) {
         allTasks.add(TaskModel.fromJson(element));
       }
